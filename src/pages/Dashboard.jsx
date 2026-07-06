@@ -33,44 +33,57 @@ function Dashboard() {
     }, []);
 
     return (
-        <>
 
-            <Navbar />
+        <div className="dashboard-container">
 
             <Sidebar />
 
-            <div style={{ margin: "20px" }}>
+            <div className="dashboard-content">
 
-                <input
-                    type="text"
-                    placeholder="Search Notes"
-                    value={keyword}
-                    onChange={(e) => setKeyword(e.target.value)}
-                />
+                <Navbar />
 
-                <button onClick={handleSearch}>
-                    Search
-                </button>
+                <div style={{ margin: "20px" }}>
+
+                    <input
+                        type="text"
+                        placeholder="Search Notes"
+                        value={keyword}
+                        onChange={(e) => setKeyword(e.target.value)}
+                    />
+
+                    <button onClick={handleSearch}>
+                        Search
+                    </button>
+
+                </div>
+
+                <CreateNote refresh={loadNotes} />
+
+                <hr />
+
+                {notes.length > 0 ? (
+
+                    notes.map((note) => (
+
+                        <NoteCard
+                            key={note.id}
+                            note={note}
+                        />
+
+                    ))
+
+                ) : (
+
+                    <h3>No Notes Found</h3>
+
+                )}
 
             </div>
 
-            <CreateNote refresh={loadNotes} />
+        </div>
 
-            <hr />
-
-            {notes.length > 0 ? (
-                notes.map((note) => (
-                    <NoteCard
-                        key={note.id}
-                        note={note}
-                    />
-                ))
-            ) : (
-                <h3>No Notes Found</h3>
-            )}
-
-        </>
     );
+
 }
 
 export default Dashboard;

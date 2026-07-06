@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { registerUser } from "../services/authService";
+import { toast } from "react-toastify";
 
 function Register(){
 
@@ -11,6 +12,7 @@ function Register(){
         password:""
 
     });
+    const [loading, setLoading] = useState(false);
 
     const handleChange=(e)=>{
 
@@ -24,26 +26,31 @@ function Register(){
 
     };
 
-    const handleSubmit=async(e)=>{
+    const handleSubmit = async (e) => {
 
-        e.preventDefault();
+    e.preventDefault();
 
-        try{
+    setLoading(true);
 
-            const response=await registerUser(user);
+    try {
 
-            alert(response.message);
+        await registerUser(formData);
 
-        }
+        toast.success("Registration Successful");
 
-        catch(error){
+        navigate("/");
 
-            alert("Registration Failed");
+    } catch (error) {
 
-        }
+        toast.error("Registration Failed");
 
-    };
+    } finally {
 
+        setLoading(false);
+
+    }
+
+};
     return(
 
         <form onSubmit={handleSubmit}>
@@ -81,11 +88,23 @@ function Register(){
 
             <br/>
 
-            <button>
+           <button type="submit" disabled={loading}>
 
-                Register
+    {
 
-            </button>
+        loading
+
+        ?
+
+        "Registering..."
+
+        :
+
+        "Register"
+
+    }
+
+</button>
 
         </form>
 

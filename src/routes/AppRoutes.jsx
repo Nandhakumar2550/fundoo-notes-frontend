@@ -6,49 +6,50 @@ import Dashboard from "../pages/Dashboard";
 import NotFound from "../pages/NotFound";
 
 import MainLayout from "../layouts/MainLayout";
-import ProtectedRoute from "../components/ProtectedRoute";
+import ProtectedRoute from "./ProtectedRoute";
 
 function AppRoutes() {
 
-  return (
+    return (
 
-    <BrowserRouter>
+        <BrowserRouter>
 
-      <MainLayout>
+            <MainLayout>
 
-        <Routes>
+                <Routes>
 
-          <Route
-            path="/"
-            element={<Login />}
-          />
+                    <Route
+                        path="/"
+                        element={<Login />}
+                    />
 
-          <Route
-            path="/register"
-            element={<Register />}
-          />
+                    <Route
+                        path="/register"
+                        element={<Register />}
+                    />
 
-          <Route
-            path="/dashboard"
-            element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            }
-          />
+                    <Route
+                        path="/dashboard"
+                        element={
+                            <ProtectedRoute>
+                                <Dashboard />
+                            </ProtectedRoute>
+                        }
+                    />
 
-          <Route
-            path="*"
-            element={<NotFound />}
-          />
+                    <Route
+                        path="*"
+                        element={<NotFound />}
+                    />
 
-        </Routes>
+                </Routes>
 
-      </MainLayout>
+            </MainLayout>
 
-    </BrowserRouter>
+        </BrowserRouter>
 
-  );
+    );
+
 }
 
 export default AppRoutes;

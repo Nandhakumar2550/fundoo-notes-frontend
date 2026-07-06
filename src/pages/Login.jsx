@@ -2,6 +2,7 @@ import { useState } from "react";
 import { loginUser } from "../services/authService";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import { toast } from "react-toastify";
 
 function Login(){
 
@@ -15,6 +16,7 @@ function Login(){
         password:""
 
     });
+    const [loading, setLoading] = useState(false);
 
     const handleChange=(e)=>{
 
@@ -28,29 +30,33 @@ function Login(){
 
     };
 
-    const handleSubmit=async(e)=>{
+ const handleSubmit = async (e) => {
 
-        e.preventDefault();
+    e.preventDefault();
 
-        try{
+    setLoading(true);
 
-            const response=await loginUser(user);
+    try {
 
-            login(response.token);
+        const response = await loginUser(formData);
 
-            alert(response.message);
+        login(response.token);
 
-            navigate("/dashboard");
+        toast.success("Login Successful");
 
-        }
+        navigate("/dashboard");
 
-        catch(error){
+    } catch (error) {
 
-            alert("Login Failed");
+        toast.error("Login Failed");
 
-        }
+    } finally {
 
-    };
+        setLoading(false);
+
+    }
+
+};
 
     return(
 
@@ -73,12 +79,23 @@ function Login(){
 
             <br/>
 
-            <button>
+           <button type="submit" disabled={loading}>
 
-                Login
+    {
 
-            </button>
+        loading
 
+        ?
+
+        "Logging In..."
+
+        :
+
+        "Login"
+
+    }
+
+</button>
         </form>
 
     );

@@ -4,24 +4,21 @@ export const AuthContext = createContext();
 
 function AuthProvider({ children }) {
 
-    const [token, setToken] = useState(localStorage.getItem("token"));
+    const [token, setToken] = useState(
+        localStorage.getItem("token")
+    );
 
-    const login = (jwt) => {
-
-        localStorage.setItem("token", jwt);
-
-        setToken(jwt);
+    const login = (jwtToken) => {
+        localStorage.setItem("token", jwtToken);
+        setToken(jwtToken);
     };
 
     const logout = () => {
-
         localStorage.removeItem("token");
-
         setToken(null);
     };
 
     return (
-
         <AuthContext.Provider
             value={{
                 token,
@@ -31,9 +28,7 @@ function AuthProvider({ children }) {
         >
             {children}
         </AuthContext.Provider>
-
     );
-
 }
 
 export default AuthProvider;
