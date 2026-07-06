@@ -4,98 +4,88 @@ import { useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { toast } from "react-toastify";
 
-function Login(){
+function Login() {
 
     const navigate = useNavigate();
 
     const { login } = useAuth();
 
-    const [user,setUser]=useState({
-
-        email:"",
-        password:""
-
+    const [user, setUser] = useState({
+        email: "",
+        password: ""
     });
+
     const [loading, setLoading] = useState(false);
 
-    const handleChange=(e)=>{
+    const handleChange = (e) => {
 
         setUser({
-
             ...user,
-
-            [e.target.name]:e.target.value
-
+            [e.target.name]: e.target.value
         });
 
     };
 
- const handleSubmit = async (e) => {
+    const handleSubmit = async (e) => {
 
-    e.preventDefault();
+        e.preventDefault();
 
-    setLoading(true);
+        setLoading(true);
 
-    try {
+        try {
 
-        const response = await loginUser(formData);
+            const response = await loginUser(user);
 
-        login(response.token);
+            login(response.token);
 
-        toast.success("Login Successful");
+            toast.success("Login Successful");
 
-        navigate("/dashboard");
+            navigate("/dashboard");
 
-    } catch (error) {
+        } catch (error) {
 
-        toast.error("Login Failed");
+            console.log(error);
 
-    } finally {
+            toast.error(
+                error.response?.data?.message || "Login Failed"
+            );
 
-        setLoading(false);
+        } finally {
 
-    }
+            setLoading(false);
 
-};
+        }
 
-    return(
+    };
+
+    return (
 
         <form onSubmit={handleSubmit}>
 
             <input
+                type="email"
                 name="email"
                 placeholder="Email"
+                value={user.email}
                 onChange={handleChange}
             />
 
-            <br/>
+            <br />
 
             <input
                 type="password"
                 name="password"
                 placeholder="Password"
+                value={user.password}
                 onChange={handleChange}
             />
 
-            <br/>
+            <br />
 
-           <button type="submit" disabled={loading}>
+            <button type="submit" disabled={loading}>
+                {loading ? "Logging In..." : "Login"}
+            </button>
 
-    {
-
-        loading
-
-        ?
-
-        "Logging In..."
-
-        :
-
-        "Login"
-
-    }
-
-</button>
         </form>
 
     );
