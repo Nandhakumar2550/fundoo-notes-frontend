@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { registerUser } from "../services/authService";
 import { toast } from "react-toastify";
 
+import "../styles/Register.css";
+
 function Register() {
 
     const navigate = useNavigate();
@@ -44,7 +46,8 @@ function Register() {
             console.log(error);
 
             toast.error(
-                error.response?.data?.message || "Registration Failed"
+                error.response?.data?.message ||
+                "Registration Failed"
             );
 
         } finally {
@@ -57,53 +60,73 @@ function Register() {
 
     return (
 
-        <form onSubmit={handleSubmit}>
+        <div className="register-container">
 
-            <input
-                type="text"
-                name="firstName"
-                placeholder="First Name"
-                onChange={handleChange}
-                value={user.firstName}
-            />
+            <h2>Create Fundoo Account</h2>
 
-            <br />
+            <p className="subtitle">
+                Register to start managing your notes
+            </p>
 
-            <input
-                type="text"
-                name="lastName"
-                placeholder="Last Name"
-                onChange={handleChange}
-                value={user.lastName}
-            />
+            <form onSubmit={handleSubmit}>
 
-            <br />
+                <input
+                    type="text"
+                    name="firstName"
+                    placeholder="First Name"
+                    value={user.firstName}
+                    onChange={handleChange}
+                    autoComplete="given-name"
+                    required
+                />
 
-            <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                onChange={handleChange}
-                value={user.email}
-            />
+                <input
+                    type="text"
+                    name="lastName"
+                    placeholder="Last Name"
+                    value={user.lastName}
+                    onChange={handleChange}
+                    autoComplete="family-name"
+                    required
+                />
 
-            <br />
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Email Address"
+                    value={user.email}
+                    onChange={handleChange}
+                    autoComplete="email"
+                    required
+                />
 
-            <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                onChange={handleChange}
-                value={user.password}
-            />
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    value={user.password}
+                    onChange={handleChange}
+                    autoComplete="new-password"
+                    required
+                />
 
-            <br />
+                <button
+                    type="submit"
+                    disabled={loading}
+                >
+                    {loading ? "Registering..." : "Register"}
+                </button>
 
-            <button type="submit" disabled={loading}>
-                {loading ? "Registering..." : "Register"}
-            </button>
+            </form>
 
-        </form>
+            <p className="login-link">
+                Already have an account?{" "}
+                <span onClick={() => navigate("/")}>
+                    Login
+                </span>
+            </p>
+
+        </div>
 
     );
 

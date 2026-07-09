@@ -1,0 +1,72 @@
+.note-card{
+    background:#ffffff;
+    border-radius:12px;
+    padding:20px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.10);
+    transition:0.3s;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    min-height:180px;
+}
+
+.note-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 8px 20px rgba(0,0,0,0.15);
+}
+
+.note-card h3{
+    color:#202124;
+    margin-bottom:12px;
+    font-size:20px;
+}
+
+.note-card p{
+    color:#5f6368;
+    line-height:1.6;
+    flex:1;
+    margin-bottom:20px;
+}
+
+.note-actions{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.note-actions button{
+    flex:1;
+    border:none;
+    padding:10px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.pin-btn{
+    background:#4285f4;
+    color:white;
+}
+
+.pin-btn:hover{
+    background:#1967d2;
+}
+
+.archive-btn{
+    background:#fbbc04;
+    color:white;
+}
+
+.archive-btn:hover{
+    background:#f29900;
+}
+
+.delete-btn{
+    background:#ea4335;
+    color:white;
+}
+
+.delete-btn:hover{
+    background:#c5221f;
+}

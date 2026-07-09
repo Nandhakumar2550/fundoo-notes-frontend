@@ -1,23 +1,23 @@
 import { useState } from "react";
 import { createNote } from "../services/noteService";
+import { toast } from "react-toastify";
+
+import "../styles/CreateNote.css";
 
 function CreateNote({ refresh }) {
 
     const [note, setNote] = useState({
-
         title: "",
         description: ""
-
     });
+
+    const [loading, setLoading] = useState(false);
 
     const handleChange = (e) => {
 
         setNote({
-
             ...note,
-
             [e.target.name]: e.target.value
-
         });
 
     };
@@ -26,48 +26,78 @@ function CreateNote({ refresh }) {
 
         e.preventDefault();
 
-        await createNote(note);
+        if (
+            note.title.trim() === "" &&
+            note.description.trim() === ""
+        ) {
+            toast.warning("Please enter a title or description.");
+            return;
+        }
 
-        setNote({
+        setLoading(true);
 
-            title: "",
-            description: ""
+        try {
 
-        });
+            await createNote(note);
 
-        refresh();
+            toast.success("Note Created Successfully");
+
+            setNote({
+                title: "",
+                description: ""
+            });
+
+            refresh();
+
+        } catch (error) {
+
+            console.log(error);
+
+            toast.error("Unable to create note.");
+
+        } finally {
+
+            setLoading(false);
+
+        }
 
     };
 
     return (
 
-        <form onSubmit={handleSubmit}>
+        <div className="create-note-container">
 
-            <input
-                name="title"
-                value={note.title}
-                onChange={handleChange}
-                placeholder="Title"
-            />
+            <form
+                className="create-note-form"
+                onSubmit={handleSubmit}
+            >
 
-            <br />
+                <input
+                    type="text"
+                    name="title"
+                    placeholder="Title"
+                    value={note.title}
+                    onChange={handleChange}
+                />
 
-            <textarea
-                name="description"
-                value={note.description}
-                onChange={handleChange}
-                placeholder="Description"
-            />
+                <textarea
+                    name="description"
+                    placeholder="Take a note..."
+                    rows="4"
+                    value={note.description}
+                    onChange={handleChange}
+                />
 
-            <br />
+                <button
+                    type="submit"
+                    disabled={loading}
+                >
+                    {loading ? "Adding..." : "Add Note"}
+                </button>
 
-            <button>
+            </form>
 
-                Add Note
-
-            </button>
-
-        </form>
+        </div>
 
     );
 

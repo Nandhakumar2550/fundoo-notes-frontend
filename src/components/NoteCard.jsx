@@ -1,3 +1,5 @@
+import "../styles/NoteCard.css";
+
 function NoteCard({
 
     note,
@@ -12,35 +14,36 @@ function NoteCard({
 
     return (
 
-        <div
-            style={{
-                border: "1px solid gray",
-                padding: "15px",
-                marginBottom: "15px"
-            }}
-        >
+        <div className="note-card">
 
             <h3>{note.title}</h3>
 
             <p>{note.description}</p>
 
-            <button
-                onClick={() => onPin(note.id)}
-            >
-                Pin
-            </button>
+            <div className="note-actions">
 
-            <button
-                onClick={() => onArchive(note.id)}
-            >
-                Archive
-            </button>
+                <button
+                    className="pin-btn"
+                    onClick={() => onPin(note.id)}
+                >
+                    📌 Pin
+                </button>
 
-            <button
-                onClick={() => onDelete(note.id)}
-            >
-                Delete
-            </button>
+                <button
+                    className="archive-btn"
+                    onClick={() => onArchive(note.id)}
+                >
+                    📦 Archive
+                </button>
+
+                <button
+                    className="delete-btn"
+                    onClick={() => onDelete(note.id)}
+                >
+                    🗑 Delete
+                </button>
+
+            </div>
 
         </div>
 

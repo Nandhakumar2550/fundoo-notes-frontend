@@ -1,0 +1,19 @@
+.label{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:8px 14px;
+    margin:5px;
+    border-radius:20px;
+    background:#fbbc04;
+    color:white;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.label:hover{
+    background:#f29900;
+    transform:scale(1.05);
+}

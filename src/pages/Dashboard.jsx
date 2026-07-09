@@ -7,6 +7,8 @@ import CreateNote from "../components/CreateNote";
 
 import { getAllNotes, searchNotes } from "../services/noteService";
 
+import "../styles/Dashboard.css";
+
 function Dashboard() {
 
     const [notes, setNotes] = useState([]);
@@ -42,41 +44,54 @@ function Dashboard() {
 
                 <Navbar />
 
-                <div style={{ margin: "20px" }}>
+                <div className="dashboard-header">
 
-                    <input
-                        type="text"
-                        placeholder="Search Notes"
-                        value={keyword}
-                        onChange={(e) => setKeyword(e.target.value)}
-                    />
+                    <h2>My Notes</h2>
 
-                    <button onClick={handleSearch}>
-                        Search
-                    </button>
+                    <div className="search-box">
+
+                        <input
+                            type="text"
+                            placeholder="Search Notes..."
+                            value={keyword}
+                            onChange={(e) => setKeyword(e.target.value)}
+                        />
+
+                        <button onClick={handleSearch}>
+                            Search
+                        </button>
+
+                    </div>
 
                 </div>
 
                 <CreateNote refresh={loadNotes} />
 
-                <hr />
+                <div className="notes-grid">
 
-                {notes.length > 0 ? (
+                    {notes.length > 0 ? (
 
-                    notes.map((note) => (
+                        notes.map((note) => (
 
-                        <NoteCard
-                            key={note.id}
-                            note={note}
-                        />
+                            <NoteCard
+                                key={note.id}
+                                note={note}
+                            />
 
-                    ))
+                        ))
 
-                ) : (
+                    ) : (
 
-                    <h3>No Notes Found</h3>
+                        <div className="empty-notes">
 
-                )}
+                            <h3>No Notes Available</h3>
+                            <p>Create your first note.</p>
+
+                        </div>
+
+                    )}
+
+                </div>
 
             </div>
 

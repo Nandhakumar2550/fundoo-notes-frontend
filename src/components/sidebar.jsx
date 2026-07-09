@@ -1,18 +1,32 @@
+import "../styles/Sidebar.css";
+
 function Sidebar() {
 
     return (
 
-        <aside>
+        <aside className="sidebar">
+
+            <h3 className="sidebar-title">
+                Menu
+            </h3>
 
             <ul>
 
-                <li>Notes</li>
+                <li>
+                    📝 Notes
+                </li>
 
-                <li>Archive</li>
+                <li>
+                    📦 Archive
+                </li>
 
-                <li>Trash</li>
+                <li>
+                    🗑 Trash
+                </li>
 
-                <li>Labels</li>
+                <li>
+                    🏷 Labels
+                </li>
 
             </ul>
 

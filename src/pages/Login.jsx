@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { toast } from "react-toastify";
 
+import "../styles/Login.css";
+
 function Login() {
 
     const navigate = useNavigate();
@@ -60,33 +62,40 @@ function Login() {
 
     return (
 
-        <form onSubmit={handleSubmit}>
+        <div className="login-container">
 
-            <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                value={user.email}
-                onChange={handleChange}
-            />
+            <h2>Fundoo Notes</h2>
 
-            <br />
+            <form onSubmit={handleSubmit}>
 
-            <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                value={user.password}
-                onChange={handleChange}
-            />
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    value={user.email}
+                    onChange={handleChange}
+                    autoComplete="email"
+                />
 
-            <br />
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    value={user.password}
+                    onChange={handleChange}
+                    autoComplete="current-password"
+                />
 
-            <button type="submit" disabled={loading}>
-                {loading ? "Logging In..." : "Login"}
-            </button>
+                <button
+                    type="submit"
+                    disabled={loading}
+                >
+                    {loading ? "Logging In..." : "Login"}
+                </button>
 
-        </form>
+            </form>
+
+        </div>
 
     );
 

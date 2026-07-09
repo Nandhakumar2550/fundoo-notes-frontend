@@ -1,6 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
+import "../styles/Navbar.css";
+
 function Navbar() {
 
     const { token, logout } = useAuth();
@@ -17,40 +19,45 @@ function Navbar() {
 
     return (
 
-        <nav
-            style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                padding: "15px 30px",
-                backgroundColor: "#f5f5f5",
-                borderBottom: "1px solid #ddd"
-            }}
-        >
+        <nav className="navbar">
 
-            <h2>Fundoo Notes</h2>
+            <div className="logo">
 
-            <div>
+                <span>📝</span>
+
+                <h2>Fundoo Notes</h2>
+
+            </div>
+
+            <div className="nav-links">
 
                 {!token ? (
+
                     <>
-                        <Link to="/">Login</Link>{" | "}
+
+                        <Link to="/">Login</Link>
+
                         <Link to="/register">Register</Link>
+
                     </>
+
                 ) : (
+
                     <>
-                        <Link to="/dashboard">Dashboard</Link>{" | "}
+
+                        <Link to="/dashboard">
+                            Dashboard
+                        </Link>
 
                         <button
+                            className="logout-btn"
                             onClick={handleLogout}
-                            style={{
-                                marginLeft: "10px",
-                                cursor: "pointer"
-                            }}
                         >
                             Logout
                         </button>
+
                     </>
+
                 )}
 
             </div>
